@@ -8,12 +8,13 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import { useRecoilState } from 'recoil';
-import { login, loginModal } from 'states';
+import { login, modalOpen, modalState } from 'states';
 import { sendLogin } from 'utils';
 
 const Login = () => {
   const [isLogin, setLogin] = useRecoilState(login);
-  const [isLoginModalOpen, setLoginModalOpen] = useRecoilState(loginModal);
+  const [isModalOpen, setModalOpen] = useRecoilState(modalOpen);
+  const [getModalState, setModalState] = useRecoilState(modalState);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -24,7 +25,7 @@ const Login = () => {
     ).then((res) => {
       if (res.data.status === 'Success') {
         setLogin(true);
-        setLoginModalOpen(false);
+        setModalOpen(false);
       }
     });
   };
@@ -81,18 +82,24 @@ const Login = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}>
+          sx={{ mt: 3, mb: 2, height: '48px' }}>
           로그인
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link
+              href="#"
+              variant="body2"
+              onClick={() => setModalState('ForgotPassword')}>
               비밀번호를 잊었습니까?
             </Link>
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2">
-              {'회원가입'}
+            <Link
+              component="button"
+              variant="body2"
+              onClick={() => setModalState('SignUp')}>
+              회원가입
             </Link>
           </Grid>
         </Grid>

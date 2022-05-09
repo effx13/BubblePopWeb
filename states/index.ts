@@ -10,9 +10,14 @@ const login = atom({
   default: false,
 });
 
-const loginModal = atom({
-  key: 'loginModal',
+const modalOpen = atom({
+  key: 'modalOpen',
   default: false,
 });
 
-export { drawer, login, loginModal };
+const modalState = atom({
+  key: 'modalState',
+  default: 'Login',
+});
+
+export { drawer, login, modalOpen, modalState };
