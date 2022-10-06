@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { login } from 'states';
+import {useRecoilState} from 'recoil';
+import {login} from 'states';
 
 const getQueueCount = async () => {
   try {
@@ -11,31 +11,50 @@ const getQueueCount = async () => {
   }
 };
 
-const sendLogin = async (userid: string, pw: string, remember: boolean) => {
+const getQueueData = async () => {
+  try {
+    const res = await axios.get('/queue/data');
+    return res.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const sendLogin = async (userId: FormDataEntryValue | null, password: FormDataEntryValue | null) => {
   try {
     const res = await axios({
-      url: '/login',
+      url: '/auth/login',
       method: 'post',
       data: {
-        userid,
-        pw,
-        remember,
+        userId,
+        password,
       },
       withCredentials: true,
     });
     return res;
   } catch (e) {
-    if (e.response.data.status === 'Error') {
-      switch (e.response.data.error) {
-        case 'Invalid ID or PW':
-          console.log('아이디 또는 비밀번호가 다릅니다.');
-          break;
-        default:
-          console.log('알수 없는 오류가 발생하였습니다.');
-          break;
-      }
-    }
+    console.log(e);
   }
 };
 
-export { getQueueCount, sendLogin };
+const sendSignUp = async (userId: FormDataEntryValue | null, name: FormDataEntryValue | null, nickname: FormDataEntryValue | null, email: FormDataEntryValue | null, password: FormDataEntryValue | null) => {
+  try {
+    const res = await axios({
+      url: '/auth/signup',
+      method: 'post',
+      data: {
+        userId,
+        name,
+        nickname,
+        email,
+        password,
+      },
+      withCredentials: true,
+    });
+    return res;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export {getQueueCount, getQueueData, sendLogin, sendSignUp};

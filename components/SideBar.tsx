@@ -49,12 +49,6 @@ const SideBar = () => {
           </ListItemIcon>
           <ListItemText primary="대기열" />
         </ListItemButton>
-        <ListItemButton onClick={() => changeTab('/history')}>
-          <ListItemIcon>
-            <HistoryRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="플레이 기록" />
-        </ListItemButton>
       </List>
     </SwipeableDrawer>
   );

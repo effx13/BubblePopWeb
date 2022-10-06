@@ -1,16 +1,21 @@
 import { useQuery } from 'react-query';
-import { getQueueCount } from 'utils';
+import {getQueueCount, getQueueData} from 'utils';
 
 const Queues = () => {
-  const { isLoading, error, data } = useQuery('fetchCount', getQueueCount, {
+  const queueCount = useQuery('fetchCount', getQueueCount, {
     refetchInterval: 1000 * 2,
   });
 
-  if (error) return <div>Error</div>;
-  if (isLoading) return <div>Loading</div>;
+  const queueData = useQuery('fetchData', getQueueData, {
+    refetchInterval: 1000 * 2,
+  });
+
+  if (queueCount.error) return <div>Error</div>;
+  if (queueCount.isLoading) return <div>Loading</div>;
   return (
     <div>
-      <h2>{JSON.stringify(data)}명 대기중 </h2>
+      <h2>{JSON.stringify(queueCount.data)}명 대기중 </h2>
+      <h2>{queueData.data.map((i) => <div>{JSON.stringify(i)}</div>)}</h2>
     </div>
   );
 };
