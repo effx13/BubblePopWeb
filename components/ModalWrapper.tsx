@@ -2,7 +2,7 @@ import { Backdrop } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { SetterOrUpdater } from 'recoil';
 
-const SignModal = ({
+const ModalWrapper = ({
   isModalOpen,
   setModalOpen,
   children,
@@ -28,4 +28,4 @@ const SignModal = ({
   </>
 );
 
-export default SignModal;
+export default ModalWrapper;

@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import {Login, SideBar, SignModal, SignUp, ForgotPassword} from 'components';
+import {Login, SideBar, ModalWrapper, SignUp, ForgotPassword, AddQueue} from 'components';
 import {useRecoilState} from 'recoil';
 import {drawer, login, modalOpen, modalState} from 'states';
 import './Bar.module.css';
@@ -19,15 +19,16 @@ const Bar = () => {
   const [isLogin, setLogin] = useRecoilState(login);
   return (
     <Box sx={{flexGrow: 1}}>
-      <SignModal isModalOpen={isModalOpen} setModalOpen={setModalOpen}>
+      <ModalWrapper isModalOpen={isModalOpen} setModalOpen={setModalOpen}>
         {
           {
             Login: <Login/>,
             SignUp: <SignUp/>,
             ForgotPassword: <ForgotPassword/>,
+            AddQueue: <AddQueue/>,
           }[getModalState]
         }
-      </SignModal>
+      </ModalWrapper>
       <SideBar/>
       <AppBar position="static">
         <Toolbar>
