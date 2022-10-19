@@ -12,7 +12,7 @@ const getQueueData = async (): Promise<any> => {
   return res.data;
 };
 
-const createQueue = async (name: string | null, reservationTime: string | null): Promise<any> => {
+const createQueue = async (name: string | null, reservationTime: Date | null): Promise<any> => {
   const res = await axios({
     url: '/queue/create',
     method: 'post',
@@ -26,16 +26,20 @@ const createQueue = async (name: string | null, reservationTime: string | null):
 };
 
 const sendLogin = async (userId: FormDataEntryValue | null, password: FormDataEntryValue | null): Promise<any> => {
-  const res = await axios({
-    url: '/auth/login',
-    method: 'post',
-    data: {
-      userId,
-      password,
-    },
-    withCredentials: true,
-  });
-  return res;
+  try {
+    const res = await axios({
+      url: '/auth/login',
+      method: 'post',
+      data: {
+        userId,
+        password,
+      },
+      withCredentials: true,
+    });
+    return res;
+  } catch (err) {
+    return "Error";
+  }
 };
 
 const sendSignUp = async (userId: FormDataEntryValue | null,

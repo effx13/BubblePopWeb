@@ -19,7 +19,7 @@ const AddQueue = () => {
     const data = new FormData(event.currentTarget);
     const res = await createQueue(
       data.get('name') as string,
-      date.toISOString(),
+      date.toDate(),
     );
     if (res !== undefined) {
       setModalOpen(false);

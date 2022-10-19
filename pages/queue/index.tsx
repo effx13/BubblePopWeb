@@ -1,7 +1,6 @@
 import {useQuery} from 'react-query';
 import {getQueueCount, getQueueData} from 'utils';
 import {Button, Paper, Typography} from "@mui/material";
-import {ModalWrapper} from "../../components";
 import {useRecoilState} from "recoil";
 import {modalOpen, modalState} from "../../states";
 
@@ -23,7 +22,7 @@ const Queues = () => {
 
 
   if (queueCount.error || error) return <div>Error</div>;
-  if (queueCount.isLoading || !queueCount.data || isLoading || !data) return <div>Loading</div>;
+  if (isLoading) return <div>Loading</div>;
   return (
     <div>
       <Button variant='contained' sx={{width: '100%', my: 3, py:1}} onClick={() => {
@@ -35,7 +34,7 @@ const Queues = () => {
         </Typography>
       </Button>
       <h2>{JSON.stringify(queueCount.data)}명 대기중 </h2>
-      {data.map((reservation, i) => {
+      {data?.length === 0 ? <>대기자가 아무도 없습니다.</> : data?.map((reservation, i) => {
         const createdAt = new Date(reservation.createdAt);
         const reservationTime = new Date(reservation.reservationTime);
         return <Paper elevation={2} sx={{p: 1, mb: 2}} key={i}>

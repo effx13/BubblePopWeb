@@ -24,14 +24,13 @@ const Login = () => {
       data.get('id'),
       data.get('password'),
     );
-    if (res !== undefined && res.data.status === true) {
+    if (res === "Error" || res == undefined || res.data.status === false) {
+      setLogin(false);
+      setLoginError(true);
+    } else {
       setLogin(true);
       setLoginError(false);
       setModalOpen(false);
-
-    } else {
-      setLogin(false);
-      setLoginError(true);
     }
   };
   return (
