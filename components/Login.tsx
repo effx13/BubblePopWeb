@@ -24,7 +24,7 @@ const Login = () => {
       data.get('id'),
       data.get('password'),
     );
-    if (res === "Error" || res == undefined || res.data.status === false) {
+    if (res === "Error" || res === undefined || res.data.status === false) {
       setLogin(false);
       setLoginError(true);
     } else {

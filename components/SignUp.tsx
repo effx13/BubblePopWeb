@@ -4,9 +4,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import React from "react";
-import {sendSignUp} from "../utils";
 import {useRecoilState} from "recoil";
-import {login, modalOpen, modalState} from "../states";
+import {sendSignUp} from "../utils";
+import {modalOpen, modalState} from "../states";
 
 const SignUp = () => {
   const [isModalOpen, setModalOpen] = useRecoilState(modalOpen);
